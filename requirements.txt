@@ -1,0 +1,4 @@
+﻿cryptography==50.0.2
+numpy==2.5.5
+scikit-learn==1.9.1
+torch==2.15.0
