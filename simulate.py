@@ -43,7 +43,19 @@ def normal_day(prev_dir, new_dir):
 
 def attack_day(prev_dir, new_dir, fraction):
     # We write this after normal_day works.
-    pass
+    shutil.copytree(prev_dir,new_dir)
+    files=sorted(new_dir.glob("*"))
+
+    how_many=round(len(files)*(fraction))
+    chosen = random.sample(files, k=how_many)
+
+    fernet = Fernet(Fernet.generate_key())
+
+    for path in chosen:
+        data = path.read_bytes()
+        locked = fernet.encrypt(data)
+        encrypted = base64.urlsafe_b64decode(locked)
+        path.write_bytes(encrypted)
 
 
 def main():
